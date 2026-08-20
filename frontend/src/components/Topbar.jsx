@@ -8,13 +8,14 @@ export default function Topbar({ title = 'Dashboard' }) {
   const displayName = localStorage.getItem('m360_display_name') || 'Service Rep'
 
   function handleLogout() {
-    localStorage.removeItem('m360_token')
-    localStorage.removeItem('m360_display_name')
-    localStorage.removeItem('m360_role')
-    localStorage.removeItem('m360_username')
-    localStorage.removeItem('m360_email')
-    window.location.href = '/sign.html'
-  }
+  localStorage.removeItem('m360_token')
+  localStorage.removeItem('m360_display_name')
+  localStorage.removeItem('m360_role')
+  localStorage.removeItem('m360_username')
+  localStorage.removeItem('m360_email')
+
+  navigate('/login', { replace: true })
+}
 
   return (
     <header className="h-16 bg-white border-b border-slate-100 flex items-center justify-between px-6 sticky top-0 z-10">
