@@ -25,8 +25,7 @@ from pydantic import BaseModel
 from db import db as data, initialize_database
 
 # Create/verify normalized PostgreSQL tables only. Seed explicitly with init_db.py.
-initialize_database(seed_if_empty=False)
-
+initialize_database(seed_if_empty=True)
 APP_SECRET = os.getenv("M360_APP_SECRET", "member360-demo-secret-change-me")
 TOKEN_TTL_SECONDS = int(os.getenv("M360_TOKEN_TTL", str(8 * 60 * 60)))
 
