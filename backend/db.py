@@ -23,10 +23,26 @@ DATABASE_URL = os.getenv(
     "DATABASE_URL",
     "postgresql+psycopg://postgres:postgres@localhost:5432/member360",
 )
-if not DATABASE_URL.startswith(("postgresql://", "postgresql+psycopg://", "postgresql+psycopg2://")):
+
+if not DATABASE_URL.startswith(
+    ("postgresql://", "postgresql+psycopg://", "postgresql+psycopg2://")
+):
     raise RuntimeError("DATABASE_URL must point to PostgreSQL.")
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True, future=True)
+# Render may provide a standard postgresql:// URL.
+# Explicitly use Psycopg 3, which is installed in requirements.txt.
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace(
+        "postgresql://",
+        "postgresql+psycopg://",
+        1,
+    )
+
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    future=True,
+)
 
 class Base(DeclarativeBase):
     pass
