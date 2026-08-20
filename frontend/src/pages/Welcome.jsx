@@ -70,9 +70,9 @@ export default function Welcome() {
   }
 
   function handleLogout() {
-    localStorage.clear()
-    window.location.href = '/sign.html'
-  }
+  localStorage.clear()
+  navigate('/login', { replace: true })
+}
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
